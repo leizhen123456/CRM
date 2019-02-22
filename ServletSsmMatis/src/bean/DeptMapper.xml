@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.DeptDao">
+	<!-- 查询所有 -->
+	<select id="find" resultType="dept">
+		select * from dept
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="add" parameterType="dept">
+		insert into dept values(#{dno},#{dname},#{empCount})
+	</insert>
+	
+	
+	<!-- 按照id查询 -->
+	<select id="findId" resultType="dept" parameterType="int">
+	select * from dept where dno=#{dno}
+	</select>
+	<!-- 修改 -->
+	<update id="modify" parameterType="dept">
+		update dept set dname=#{dname},empCount=#{empCount} where dno=#{dno}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="del" parameterType="int">
+		delete from dept where dno=#{dno}
+	</delete>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		
+		<!-- 扫面service层注解 -->
+		<context:component-scan base-package="service"></context:component-scan>
+		
+		<!-- 数据源  DBCP  C3P0-->
+		<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
+			<!-- 驱动类 -->
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+			<!-- 连接字符串-->
+			<property name="url" value="jdbc:mysql:///mydb?useUnicode=true&amp;characterEncoding=utf-8"></property>
+			<!-- 用户名 -->
+			<property name="username" value="root"></property>
+			<!-- 密码 -->
+			<property name="password" value="root"></property>
+		</bean>
+		
+		<!-- 配置SqlSessionFactoryBean -->
+		<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean ">
+			<!-- 引用数据源 -->
+			<property name="dataSource" ref="ds"></property>
+			<!-- 读取*mapper所在目录 -->
+			<property name="mapperLocations" value="classpath:bean/*.xml"></property>
+			<!-- 对bean包下所有的实体类取别名 -->
+			<property name="typeAliasesPackage" value="bean"></property>
+		</bean>
+		<!-- 将接口与*mapper.xml文件注册关联 -->
+		<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!-- 引用session工厂 -->
+			<property name="sqlSessionFactory" ref="sessionFactory"></property>
+			<!-- 配置Dao包所在位置 -->
+			<property name="basePackage" value="dao"></property>
+		</bean>
+		
+</beans>

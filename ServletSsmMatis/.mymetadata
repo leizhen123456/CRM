@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ServletSsmMatis"
+  id="myeclipse.1539745159346"
+  context-root="/ServletSsmMatis"
+  j2ee-spec="5.0"
+  archive="ServletSsmMatis.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
